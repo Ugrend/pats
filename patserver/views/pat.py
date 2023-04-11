@@ -1,5 +1,5 @@
 import json
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, BackgroundTasks
 from os.path import exists
 
 from sqlmodel import select
@@ -38,12 +38,7 @@ async def get_stats():
     return CURRENT_STATE
 
 
-@router.post("")
-async def apply_pat(request: Request):
-    if CURRENT_STATE is None:
-        load_state()
-    body = await request.body()
-    parsed = body.decode("utf-8")
+def background_pat_job(parsed: str):
     player, emoter, world, emote = parsed.split(",")
     player, player_world = player.split("@")
     emoter, emoter_world = emoter.split("@")
@@ -88,4 +83,12 @@ async def apply_pat(request: Request):
         existing_char["players"][str(emoter_obj.id)] = existing_emoter
         CURRENT_STATE[str(player_obj.id)] = existing_char
         save()
+
+@router.post("")
+async def apply_pat(request: Request, background_tasks: BackgroundTasks):
+    if CURRENT_STATE is None:
+        load_state()
+    body = await request.body()
+    parsed = body.decode("utf-8")
+    background_tasks.add_task(background_pat_job, parsed)
     return "Ok"
