@@ -56,14 +56,22 @@ async def apply_pat(request: Request):
 
         if player_obj is None:
             player_obj = Player(name=player, server=player_world).set_lodestone_id().set_profile_uris()
-            logger.info(player_obj)
-            session.add(player_obj)
-            session.commit()
+            check = session.exec(select(Player).where(Player.lodestone_id == player_obj.lodestone_id)).first()
+            if check is None:
+                logger.info(player_obj)
+                session.add(player_obj)
+                session.commit()
+            else:
+                player_obj = check
         if emoter_obj is None:
             emoter_obj = Player(name=emoter, server=emoter_world).set_lodestone_id().set_profile_uris()
-            session.add(emoter_obj)
-            session.add(emoter_obj)
-            session.commit()
+            check = session.exec(select(Player).where(Player.lodestone_id == player_obj.lodestone_id)).first()
+            if check is None:
+                session.add(emoter_obj)
+                session.add(emoter_obj)
+                session.commit()
+            else:
+                emoter_obj = check
 
         audit = EmoteAudit(source_player_id=emoter_obj.id, target_player_id=player_obj.id, emote=emote, location=world)
         session.add(audit)
