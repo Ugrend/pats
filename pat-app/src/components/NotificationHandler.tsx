@@ -18,7 +18,7 @@ const Notification: React.FC<NotificationProps> = ({player, emoter, emote, locat
         <div>Bringing the total to: {total_count}</div>
         <div>
             {
-                total_count == 69 && "Nice!!!"
+                total_count == 69 && "Nice!!"
             }
             {
                 (total_count - 1).toString().endsWith("69") && "Breaking the 69 BOOOOOOOOOOOOOOOOOOOO"

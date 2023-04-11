@@ -1,6 +1,7 @@
 import React from "react";
 import useSWR from "swr";
 import {APIEmoterStat, APIPatStat, APIPlayer} from "@/types/api";
+import './PatPlayer.css';
 import {
     Avatar,
     CircularProgress, Paper, Table,
@@ -65,7 +66,7 @@ const PatPlayerInfo: React.FC<PatPlayerInfoProps> = ({player, players, patStats}
        </div>
 
        <div style={{display: "flex", alignItems: "center"}}>
-           <img src={player.portrait_uri} height={"500px"}/>
+           <img className="hidden-mobile" src={player.portrait_uri} height={"500px"}/>
            <div style={{flex: 1}}>
                <Typography>Total Pats: {patStats.total_pats ?? 0}</Typography>
                <Typography>Total Dotes: {patStats.total_dotes ?? 0}</Typography>
