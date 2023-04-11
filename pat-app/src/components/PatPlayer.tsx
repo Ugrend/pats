@@ -39,7 +39,7 @@ const EmoterTableEntry: React.FC<EmoterTableEntryProps> = ({player, emoterStat})
         <TableCell><Typography>{emoterStat.total_pats ?? 0}</Typography></TableCell>
         <TableCell><Typography>{emoterStat.total_dotes ?? 0}</Typography></TableCell>
         <TableCell><Typography>{emoterStat.total_nice ?? 0}</Typography></TableCell>
-        <TableCell><Typography>{emoterStat.total_break ?? 0}</Typography></TableCell>
+        <TableCell><Typography>{emoterStat.total_breaks ?? 0}</Typography></TableCell>
     </TableRow>
 }
 const EmoterInfo: React.FC<EmoterInfoProps> = ({id, players, emoterStat}) => {
