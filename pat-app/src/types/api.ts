@@ -15,6 +15,8 @@ export type APINotification = {
     emoter: APIPlayer,
     emote: string
     location: string,
+    total_player: number,
+    total_emoter: number,
     date: string
 }
 export type APIEmoterStat = {
