@@ -20,6 +20,8 @@ export type APINotification = {
 export type APIEmoterStat = {
     total_pats?: number,
     total_dotes?: number
+    total_nice?: number
+    total_break?: number
 }
 export type APIPatStat = {
     total_dotes?: number
