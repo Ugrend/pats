@@ -57,6 +57,7 @@ def background_pat_job(parsed: str):
         if emoter_obj is None:
             emoter_obj = Player(name=emoter, server=emoter_world).set_lodestone_id().set_profile_uris()
             session.add(emoter_obj)
+            session.add(emoter_obj)
             session.commit()
 
         audit = EmoteAudit(source_player_id=emoter_obj.id, target_player_id=player_obj.id, emote=emote, location=world)
