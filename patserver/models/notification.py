@@ -9,4 +9,6 @@ class Notification(BaseModel):
     emoter: Player
     emote: str
     location: str
+    total_player: int
+    total_emoter: int
     date: datetime

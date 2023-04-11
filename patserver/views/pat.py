@@ -79,14 +79,6 @@ async def apply_pat(request: Request):
         session.refresh(audit)
         session.refresh(player_obj)
         session.refresh(emoter_obj)
-        publish_notification(Notification(
-            id=audit.id,
-            player=player_obj,
-            emoter=emoter_obj,
-            emote=emote,
-            location=world,
-            date=audit.date
-        ))
 
         existing_char = CURRENT_STATE.get(str(player_obj.id), {
             "players": {}
@@ -94,8 +86,24 @@ async def apply_pat(request: Request):
         existing_emoter = existing_char["players"].get(str(emoter_obj.id), {})
         existing_char[f"total_{emote}s"] = existing_char.get(f"total_{emote}s", 0) + 1
         existing_emoter[f"total_{emote}s"] = existing_emoter.get(f"total_{emote}s", 0) + 1
+        if str(existing_char[f"total_{emote}s"]).endswith("69"):
+            existing_emoter[f"total_nice"] = existing_emoter.get(f"total_nice", 0) + 1
+        if str(existing_char[f"total_{emote}s"] - 1).endswith("69"):
+            existing_emoter[f"total_breaks"] = existing_emoter.get(f"total_breaks", 0) + 1
+
         existing_char["players"][str(emoter_obj.id)] = existing_emoter
         CURRENT_STATE[str(player_obj.id)] = existing_char
+        publish_notification(Notification(
+            id=audit.id,
+            player=player_obj,
+            emoter=emoter_obj,
+            emote=emote,
+            location=world,
+            total_player=existing_char[f"total_{emote}s"],
+            total_emoter=existing_emoter[f"total_{emote}s"],
+            date=audit.date
+        ))
+
         save()
 
     return "Ok"
