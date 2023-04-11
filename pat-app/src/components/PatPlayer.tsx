@@ -1,7 +1,6 @@
 import React from "react";
 import useSWR from "swr";
 import {APIEmoterStat, APIPatStat, APIPlayer} from "@/types/api";
-import './PatPlayer.css';
 import {
     Avatar,
     CircularProgress, Paper, Table,
