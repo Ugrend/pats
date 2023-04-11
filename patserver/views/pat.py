@@ -65,7 +65,7 @@ async def apply_pat(request: Request):
                 player_obj = check
         if emoter_obj is None:
             emoter_obj = Player(name=emoter, server=emoter_world).set_lodestone_id().set_profile_uris()
-            check = session.exec(select(Player).where(Player.lodestone_id == player_obj.lodestone_id)).first()
+            check = session.exec(select(Player).where(Player.lodestone_id == emoter_obj.lodestone_id)).first()
             if check is None:
                 session.add(emoter_obj)
                 session.add(emoter_obj)
