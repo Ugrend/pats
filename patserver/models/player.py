@@ -32,6 +32,9 @@ class Player(SQLModel, table=True):
             result = r.json()
             self.portrait_uri = result["Character"]["Portrait"]
             self.avatar_uri = result["Character"]["Avatar"]
+        else:
+            self.portrait_uri = ""
+            self.avatar_uri = ""
         return self
 
 
