@@ -18,7 +18,7 @@ const Notification: React.FC<NotificationProps> = ({player, emoter, emote, locat
         <div>Bringing the total to: {total_count}</div>
         <div>
             {
-                total_count == 69 && "Nice!!"
+                total_count.toString().endsWith("69") && "Nice!!"
             }
             {
                 (total_count - 1).toString().endsWith("69") && "Breaking the 69 BOOOOOOOOOOOOOOOOOOOO"
@@ -34,7 +34,7 @@ const NotificationHandler: React.FC = ()=>{
         for(const notification of data){
             toast(<Notification player={notification.player} emoter={notification.emoter} emote={notification.emote} location={notification.location} total_count={notification.total_player}/>, {
                 toastId: notification.id,
-                autoClose: (notification.total_player == 69 || (notification.total_player - 1).toString().endsWith("69")) ? 20000 : 5000
+                autoClose: (notification.total_player.toString().endsWith("69") || (notification.total_player - 1).toString().endsWith("69")) ? 30000 : 5000
             })
         }
     }
