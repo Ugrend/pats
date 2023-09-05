@@ -22,12 +22,16 @@ export type APINotification = {
 export type APIEmoterStat = {
     total_pats?: number,
     total_dotes?: number
+    total_hugs?: number
+    total_slaps?: number
     total_nice?: number
     total_breaks?: number
 }
 export type APIPatStat = {
     total_dotes?: number
     total_pats?: number
+    total_hugs?: number
+    total_slaps?: number
     players: {
         [key: string]: APIEmoterStat
     }

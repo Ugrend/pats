@@ -38,6 +38,8 @@ const EmoterTableEntry: React.FC<EmoterTableEntryProps> = ({player, emoterStat})
         <TableCell><div style={{display: "flex"}}><Avatar src={player.avatar_uri}/> <Typography style={{alignSelf: 'center', marginLeft: "5px"}}>{player.name}</Typography></div></TableCell>
         <TableCell><Typography>{emoterStat.total_pats ?? 0}</Typography></TableCell>
         <TableCell><Typography>{emoterStat.total_dotes ?? 0}</Typography></TableCell>
+        <TableCell><Typography>{emoterStat.total_hugs ?? 0}</Typography></TableCell>
+        <TableCell><Typography>{emoterStat.total_slaps ?? 0}</Typography></TableCell>
         <TableCell><Typography>{emoterStat.total_nice ?? 0}</Typography></TableCell>
         <TableCell><Typography>{emoterStat.total_breaks ?? 0}</Typography></TableCell>
     </TableRow>
@@ -76,6 +78,8 @@ const PatPlayerInfo: React.FC<PatPlayerInfoProps> = ({player, players, patStats}
                                <TableCell>Player</TableCell>
                                <TableCell>Total Pats</TableCell>
                                <TableCell>Total Dotes</TableCell>
+                               <TableCell>Total Hugs</TableCell>
+                               <TableCell>Total Slaps</TableCell>
                                <TableCell>Nice</TableCell>
                                <TableCell>Not Nice</TableCell>
                            </TableRow>
